@@ -1,6 +1,7 @@
 package io.github.jokoframework.utils.dto_mapping.mock;
 
 import io.github.jokoframework.utils.dto_mapping.BaseDTO;
+import io.github.jokoframework.utils.dto_mapping.BaseEntity;
 import io.github.jokoframework.utils.dto_mapping.DTOConvertable;
 import io.github.jokoframework.utils.dto_mapping.DTOUtils;
 
@@ -9,7 +10,7 @@ import java.util.Date;
 /**
  * Created by danicricco on 2/26/18.
  */
-public class CustomerEntity implements DTOConvertable<CustomerDTO>{
+public class CustomerEntity extends BaseEntity<CustomerDTO>{
 
     private Long id;
     private String firstName;
@@ -58,9 +59,6 @@ public class CustomerEntity implements DTOConvertable<CustomerDTO>{
         birthDate = pBirthDate;
     }
 
-    public CustomerDTO toDTO() {
-        return DTOUtils.fromEntityToDTO(this,new CustomerDTO());
-    }
 
     @Override
     public boolean equals(Object pO) {
