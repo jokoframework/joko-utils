@@ -6,7 +6,7 @@ import java.util.UUID;
 
 /**
  * <p>
- * Esta clase se creo para generar UUIDs en cada transaccion. Los UUIDs se
+ * Esta clase se creo para generar UUIDs. Los UUIDs se
  * utilizan en base a la clase {@link UUID} utilizando primero los bits menos
  * significativos (con mayor entropía) y los que correspondan del long mas
  * significativo
@@ -19,11 +19,13 @@ import java.util.UUID;
  * Máximo de números posibles
  * </p>
  * <p>
- * Con 96 bits tenemos 2^96 numeros posibles. Si tenemos un pico de 50 TPS
+ * Con 96 bits tenemos 2^96 numeros posibles.
+ * <p>Analisis para transacciones: </p>
+ * <p>Si tenemos un pico de 50 TPS
  * (transacciones por segundo) y asumimos que esto se mantiene constante
  * podríamos utilizar este numero por los siguientes 5*10^19 años. (Obs.:Seguir
  * leyendo para ver el analisis de colisiones)
- * 
+ * </p>
  * 
  * <p>
  * <blockquote>
@@ -103,11 +105,13 @@ import java.util.UUID;
  * Esta clase fue inicialmente pensada para generar UUIDs de transacciones pero
  * perfectamente se puede acomodar a UUIDs de otros recursos
  * </p>
- * 
+ * <p>
+ *     Los posibles largos de caracteres en base a este algoritmo son: 12,16,20
+ * </p>
  * @author danicricco
  *
  */
-// TODO luego de analizar quedamos en subir el largo generado de IDs
+
 public class TXUUIDGenerator {
 
     private static final int BYTE_SIZE = 8;
