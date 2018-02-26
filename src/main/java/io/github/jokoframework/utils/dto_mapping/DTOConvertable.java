@@ -3,6 +3,6 @@ package io.github.jokoframework.utils.dto_mapping;
 /**
  * Created by danicricco on 2/26/18.
  */
-public interface DTOConvertable {
-    BaseDTO toDTO();
+public interface DTOConvertable<T extends BaseDTO> {
+    T toDTO();
 }

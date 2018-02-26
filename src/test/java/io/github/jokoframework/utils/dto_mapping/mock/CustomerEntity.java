@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Created by danicricco on 2/26/18.
  */
-public class CustomerEntity implements DTOConvertable{
+public class CustomerEntity implements DTOConvertable<CustomerDTO>{
 
     private Long id;
     private String firstName;
@@ -58,7 +58,7 @@ public class CustomerEntity implements DTOConvertable{
         birthDate = pBirthDate;
     }
 
-    public BaseDTO toDTO() {
+    public CustomerDTO toDTO() {
         return DTOUtils.fromEntityToDTO(this,new CustomerDTO());
     }
 

@@ -25,21 +25,13 @@ public class ConversionTest {
     public void testToDTOAndBack(){
         //1) Crea un entity de prueba
         CustomerEntity customer = createCustomer();
-        BaseDTO dto = customer.toDTO();
+        CustomerDTO dto = customer.toDTO();
 
-        //2) Comprueba que el DTO devuelto es de la clase esperada
-        if(!(dto instanceof CustomerDTO)){
-            Assert.fail("Expected "+CustomerDTO.class.getName()+", but got " +
-                    ""+dto.getClass().getName());
-        }
+        //2) Comprueba que los valores se han copiado correctamente
+        checkValuesOfMockObject(customer, dto);
 
-        CustomerDTO customerDTO=(CustomerDTO)dto;
-
-        //3) Comprueba que los valores se han copiado correctamente
-        checkValuesOfMockObject(customer, customerDTO);
-
-        //4) Convierte a entity comprueba con el original
-        CustomerEntity customerEntity2 = DTOUtils.fromDTOToEntity(customerDTO, new CustomerEntity());
+        //3) Convierte a entity comprueba con el original
+        CustomerEntity customerEntity2 = DTOUtils.fromDTOToEntity(dto, new CustomerEntity());
         //Como el ID no es parte del DTO lo setea explicitamente
         customerEntity2.setId(customer.getId());
         Assert.assertEquals(customer,customerEntity2);
