@@ -29,33 +29,58 @@ public class DTOUtils {
 
     /**
      * Recorre una lista de elemenos de tipo DTOConvertable, los conviente a DTO
-     * y devuelve una lista de DTOs
-     *
-     * @param entities entidades
-     * @param clazz clase
-     * @return
+     * y devuelve una lista de DTOs.
+     * Si la lista de entities es vacio o null, devuelve un array vacio/
+     * @param entities Soporta null values
+     * @param clazz La clase DTO destino
+     * @return Siempre devuelve un array, el cual puede estar vacio
      */
     @SuppressWarnings("unchecked")
     public static <T> List<T> fromEntityToDTO(List<? extends DTOConvertable> entities, Class<T> clazz) {
         List<T> list = new ArrayList<T>();
-        List<DTOConvertable> l = (List<DTOConvertable>) entities;
-        for (DTOConvertable o : l) {
-            list.add((T) o.toDTO());
+        if(entities!=null){
+            List<DTOConvertable> l = (List<DTOConvertable>) entities;
+            for (DTOConvertable o : l) {
+                list.add((T) o.toDTO());
+            }
         }
         return list;
     }
 
+    /**
+     * Convierte un entity a un DTO en base a las propiedades. Busca que los
+     * nombres de los atributos sean iguales.
+     * @param entity El entity original
+     * @param destination El DTO d destino
+     * @param <T>
+     * @return
+     */
     public static <T extends BaseDTO> T fromEntityToDTO(DTOConvertable entity, T destination) {
         BeanUtils.copyProperties(entity, destination);
         return destination;
     }
 
-
+    /**
+     * Conviertie un DTO a un entity en base a las propiedades. Busca que los
+     * nombres de los atributos sean iguales.
+     * @param dto
+     * @param entity
+     * @param <T>
+     * @return
+     */
     public static <T extends DTOConvertable> T fromDTOToEntity(BaseDTO dto, T entity) {
         BeanUtils.copyProperties(dto, entity);
         return entity;
     }
 
+    /**
+     * Copia las propiedades de un objeto a otro basado en el nombre d elas
+     * mismas.
+     * @param origin
+     * @param destination
+     * @param <T>
+     * @return
+     */
     public static <T extends BaseDTO> T fromDTOToDTO(BaseDTO origin, T destination) {
         BeanUtils.copyProperties(origin, destination);
         return destination;
@@ -67,8 +92,9 @@ public class DTOUtils {
     }
 
     /**
-     * Get a safe list of objects or empty list
-     *
+     * Get a safe list of objects or empty list.
+     * Util para devolver listas en las que esperamos que la lista retornada
+     * no sea null, sino una lista vacia.
      * @param all original
      * @param <T> Holder type
      * @return resulting list or empty list
