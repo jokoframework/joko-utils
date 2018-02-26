@@ -30,8 +30,10 @@ public class ConversionTest {
         //2) Comprueba que los valores se han copiado correctamente
         checkValuesOfMockObject(customer, dto);
 
-        //3) Convierte a entity comprueba con el original
-        CustomerEntity customerEntity2 = DTOUtils.fromDTOToEntity(dto, new CustomerEntity());
+        //3) Carga los valores del DTO a un entity
+        CustomerEntity customerEntity2 = new CustomerEntity();
+        customerEntity2.fromDTO(dto);
+
         //Como el ID no es parte del DTO lo setea explicitamente
         customerEntity2.setId(customer.getId());
         Assert.assertEquals(customer,customerEntity2);

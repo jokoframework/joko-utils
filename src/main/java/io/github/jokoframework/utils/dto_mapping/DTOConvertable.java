@@ -15,5 +15,15 @@ package io.github.jokoframework.utils.dto_mapping;
  *
  */
 public interface DTOConvertable<T extends BaseDTO> {
+    /**
+     *
+     * @return El DTO al que la clase hace referencia
+     */
     T toDTO();
+
+    /**
+     * Asigna los valores del DTO a las propiedades del entity
+     * @param dto
+     */
+    void fromDTO(T dto);
 }

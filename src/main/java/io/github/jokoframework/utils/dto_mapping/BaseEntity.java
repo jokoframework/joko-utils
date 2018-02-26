@@ -9,7 +9,8 @@ import java.lang.reflect.ParameterizedType;
  *     El mapping se basa en el nombre
  * </p>
  */
-public abstract class BaseEntity<T extends BaseDTO> implements DTOConvertable{
+public abstract class BaseEntity<T extends BaseDTO> implements
+        DTOConvertable<T>{
 
 
     public T toDTO(){
@@ -27,5 +28,9 @@ public abstract class BaseEntity<T extends BaseDTO> implements DTOConvertable{
             throw new IllegalStateException(pE);
         }
 
+    }
+
+    public void fromDTO(T dto){
+        DTOUtils.fromDTOToEntity(dto,this);
     }
 }
