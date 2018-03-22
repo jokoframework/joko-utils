@@ -41,6 +41,7 @@ Un ejemplo para comprender mejor como utilizar los metodos de conversion puee
  
 ## Clases utilitarias
 * TXUUIDGenerator: Generacion de UUIDs que sean URL friendly y altamente random.
+* TimeUtils : Utilidades para formateo de fechas
 
 # Changelog
 El historico de versiones puede verse en el [Changelog](CHANGELOG.MD)
