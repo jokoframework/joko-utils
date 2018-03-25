@@ -4,7 +4,7 @@
   <groupId>io.github.jokoframework</groupId>
   <artifactId>joko-utils</artifactId>
   <packaging>jar</packaging>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
   <name>joko-utils</name>
   <url>http://maven.apache.org</url>
 
