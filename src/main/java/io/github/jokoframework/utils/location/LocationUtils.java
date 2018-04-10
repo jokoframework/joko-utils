@@ -14,22 +14,20 @@ import org.slf4j.LoggerFactory;
 public class LocationUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LocationUtils.class);
-    
+
     /**
-     * Calculate distance between two points in latitude and longitude taking
-     * into account height difference. If you are not interested in height
-     * difference pass 0.0. Uses Haversine method as its base.
+     * Calcula la distancia entre dos puntos en latitud y longitud tomando en
+     * cuenta la diferencia en elevación (Elevación en metros). Si no esta interesado
+     * en tomar en cuenta la diferencia en elevación pasar 0.0 en ambas. Usa el método
+     * Haversine como su base.
      *
-     * lat1, lon1 Start point lat2, lon2 End point el1 Start altitude in meters
-     * el2 End altitude in meters
-     * 
-     * @param lat1 latitud 1
-     * @param lat2 latitud 2
-     * @param lon1 longitud 1
-     * @param lon2 longitud 2
-     * @param el1 elevation 1
-     * @param el2 elevation 2
-     * @return Distance in Meters
+     * @param lat1 Latitud 1
+     * @param lat2 Latitud 2
+     * @param lon1 Longitud 1
+     * @param lon2 Longitud 2
+     * @param el1 Elevación 1
+     * @param el2 Elevación 2
+     * @return Distancia en metros
      */
     public static double distance(double lat1, double lat2, double lon1,
                                   double lon2, double el1, double el2) {
@@ -50,6 +48,19 @@ public class LocationUtils {
         return Math.sqrt(distance);
     }
 
+    /**
+     * Calcula la distancia entre dos puntos geográficos sin contar la altura y retorna dicha distancia en la medida
+     * que se incluye como argumento.
+     *
+     * @param lat1 Latitud 1
+     * @param lon1 Longitud 1
+     * @param lat2 Latitud 2
+     * @param lon2 Longitud 2
+     * @param unit String con la unidad de medida del resultado, "K" para kilómetros, "M" para metros, "N" para Millas
+     *             Náuticas y cualquier otro valor para Millas
+     * @return Distancia entre dos puntos geográficos en la unidad de medida especificada (Si no se reconoce la medida
+     *         sera en Millas)
+     */
     public static double distance(double lat1, double lon1, double lat2, double lon2, String unit) {
         double theta = lon1 - lon2;
         double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
@@ -67,20 +78,36 @@ public class LocationUtils {
         return (dist);
     }
 
-    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-	/*::	This function converts decimal degrees to radians          ::*/
-	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-    private static double deg2rad(double deg) {
+    /**
+     * Transforma el argumento de grados a radianes.
+     *
+     * @param deg Cantidad en grados
+     * @return El argumento "deg" pasado a radianes
+     */
+	private static double deg2rad(double deg) {
         return deg * Math.PI / 180.0;
     }
 
-    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-	/*::	This function converts radians to decimal degrees          ::*/
-	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    /**
+     * Transforma el argumento de radianes a grados.
+     *
+     * @param rad Cantidad en radianes
+     * @return El argumento "rad" pasado a grados
+     */
     private static double rad2deg(double rad) {
         return rad * 180 / Math.PI;
     }
 
+    /**
+     * Utiliza el argumento "distance" tal que si este es menor o igual a 1000.0 se retorna un String que contiene el
+     * monto con dos decimales, separadores de miles y la unidad de medida "m" concatenada al final. Si es mayor a
+     * 1000.0 "distance" se retorna lo mencionado pero con el monto pasado a kilómetros, sin decimales y "km"
+     * concatenado
+     *
+     * @param distance Un Double conteniendo una distancia en metros
+     * @return Un String que contiene el argumento "distance" con solo 2 decimales, separadores de miles, unidad de
+     * medida, si la cantidad es mayor a 1,000 metros se devuelve el valor en kilometros y sin decimales
+     */
     public static String formatDistance(Double distance){
         DecimalFormat formatter = new DecimalFormat("###,###.##");
         String sufix = " m";
@@ -92,6 +119,11 @@ public class LocationUtils {
         return formattedDistance.concat(sufix);
     }
 
+    /**
+     * Muestra la raiz cuadrada de la distancia pasada mediante el Logger
+     *
+     * @param distance Distancia
+     */
     private static void printDistance(Double distance){
         distance = Math.sqrt(distance);
         LOGGER.debug("CALCULATED DISTANCE: {}", formatDistance(distance));

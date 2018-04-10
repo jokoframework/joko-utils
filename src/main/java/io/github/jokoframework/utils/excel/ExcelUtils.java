@@ -23,11 +23,31 @@ import io.github.jokoframework.utils.exception.JokoUtilsException;
  */
 public class ExcelUtils {
 
+    /**
+     * Recibe una tabla con datos, una lista los nombres de las columnas de la tabla (Nombres en orden de aparición) y
+     * la dirección mas nombre del archivo que se creara (/home/user/mi_excel.xls), al finalizar el método se
+     * habrá creado un archivo Excel con los datos, dirección y nombre especificados.
+     *
+     * @param data Tabla con los datos a incluir en el archivo Excel final
+     * @param header Lista con los nombres de cada columna (En orden de aparición)
+     * @param fileName Nombre del archivo Excel final, incluyendo el camino
+     * @throws JokoUtilsException Excepción de Joko Utils
+     */
 	public void generateExcel(Table<Integer, Integer, Object> data,
 			List<String> header, String fileName) throws JokoUtilsException {
 		generateReportFile(data, header, fileName);
 	}
-	
+
+    /**
+     * Recibe una tabla con datos, una lista los nombres de las columnas de la tabla (Nombres en orden de aparición) y
+     * la dirección mas nombre del archivo que se creara (/home/user/mi_excel.xls), al finalizar el método se
+     * habrá creado un archivo Excel con los datos, dirección y nombre especificados.
+     *
+     * @param data Tabla con los datos a incluir en el archivo Excel final
+     * @param header Lista con los nombres de cada columna (En orden de aparición)
+     * @param fileName Nombre del archivo Excel final, incluyendo el camino
+     * @throws JokoUtilsException Excepción de Joko Utils
+     */
     public void generateReportFile(Table<Integer, Integer, Object> data, List<String> header, String fileName)
             throws JokoUtilsException {
         int rowCount = 0;

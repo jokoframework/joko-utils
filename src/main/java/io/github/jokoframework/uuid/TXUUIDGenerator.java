@@ -124,9 +124,10 @@ public class TXUUIDGenerator {
     private static final int DEFAULT_STRING_LENGTH = 12;
 
     /**
-     * Como maximo se producen UUIDs de characterLength
+     * Como máximo se producen UUIDs de characterLength. El límite de caracteres depende de la representación de
+     * ciertos datos.
      * 
-     * @param characterLength longitud de caracteres
+     * @param characterLength longitud máxima de caracteres
      */
     public TXUUIDGenerator(int characterLength) {
         this.characterLength = characterLength;
@@ -138,10 +139,18 @@ public class TXUUIDGenerator {
         }
     }
 
+    /**
+     * Se utiliza el valor por defecto "12" como longitud máxima de caracteres si no se especifica.
+     */
     public TXUUIDGenerator() {
         this(DEFAULT_STRING_LENGTH);
     }
 
+    /**
+     * Genera y retorna un String con un UUID de la longitud especificada en el constructor (12 por defecto).
+     *
+     * @return
+     */
     public String generate() {
 
         UUID uuid = UUID.randomUUID();

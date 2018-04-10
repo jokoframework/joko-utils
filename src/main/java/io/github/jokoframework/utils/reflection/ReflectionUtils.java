@@ -29,6 +29,15 @@ public class ReflectionUtils {
     
     private static final Logger log = LoggerFactory.getLogger(ReflectionUtils.class);
 
+	/**
+	 * El método retorna el resultado de llamar el getter para cierto atributo "fieldName" para cierto objeto "bean",
+	 * permite atributos anidados.
+	 *
+	 * @param bean Objeto con un getter para el atributo "fieldName"
+	 * @param fieldName Nombre del atributo cuyo getter se quiere invocar, puede ser un atributo anidado
+	 * @return El valor del atributo "fieldName" del objeto "bean"
+	 * @throws IllegalStateException
+	 */
 	public static Object callGetter(Object bean, String fieldName)
 			throws IllegalStateException {
 		Method m = null;
@@ -46,6 +55,15 @@ public class ReflectionUtils {
 		return ret;
 	}
 
+	/**
+	 * El método retorna el resultado de llamar el getter de un objeto "bean" para cierto campo "field" y cuyo getter
+	 * acepta una lista de Strings "parameters" como argumento, permitiendo getters mas dinámicos.
+	 *
+	 * @param bean Objeto con un getter con el nombre "field"
+	 * @param field Nombre del campo cuyo getter se quiere invocar
+	 * @param parameters Lista de Integers que es un argumento del getter a invocar
+	 * @return El valor del getter de "field" del objeto "bean" usando como argumento "parameters" para el getter
+	 */
 	public static String callGetterDynamic(Object bean, String field, List<Integer> parameters) {
 		String methodName = "get" + firstLetterToUppercase(field);
 		String ret = "_EMPTY_";
@@ -66,6 +84,15 @@ public class ReflectionUtils {
 		return ret;
 	}
 
+	/**
+	 * El método llama el setter para cierto atributo "fieldName" para cierto objeto "bean"
+	 * dado un valor a introducir "valor", permite atributos anidados.
+	 *
+	 * @param bean Objeto con un setter para el atributo "fieldName"
+	 * @param fieldName Nombre del atributo cuyo setter se quiere invocar, puede ser un atributo anidado
+	 * @param valor Valor que se quiere introducir en el atributo "fieldName" del objeto "bean"
+	 * @throws IllegalStateException
+	 */
 	public static void callSetter(Object bean, String fieldName, Object valor) {
 		Method m = null;
 		try {
@@ -80,17 +107,22 @@ public class ReflectionUtils {
 		}
 	}
 
+	/**
+	 * Describe la clase y la instancia con el formato "nombreDePropiedad" tipo de dato: valor.
+	 *
+	 * @param objeto Objeto instanciado
+	 * @return String con la descripción del objeto incluyendo el hashCode
+	 */
 	public static String describe(Object objeto) {
 		return describe(objeto, true);
 	}
-	
+
 	/**
-	 * Describes the class and the instance with the format "propertyName"
-	 * data type: value
-	 * 
-	 * @param object instanced object
-	 * @param withHash indicates if you want it with the hashCode
-	 * @return string that contains the described object
+	 * Describe la clase y la instancia con el formato "nombreDePropiedad" tipo de dato: valor.
+	 *
+	 * @param object Objeto instanciado
+	 * @param withHash True si se quiere que se muestre con el hashCode, sino False
+	 * @return String con la descripción del objeto
 	 */
 	public static String describe(Object object, Boolean withHash) {
 		String name = object.getClass().getSimpleName();
@@ -149,6 +181,13 @@ public class ReflectionUtils {
 		}
 	}
 
+	/**
+	 * Retorna el String pasado con su primer caracter pasado a mayúscula, si el primer caracter no es una letra o ya
+	 * esta en mayúscula no hace nada.
+	 *
+	 * @param value String
+	 * @return "value" con su primer caracter pasado a mayúscula
+	 */
 	public static String firstLetterToUppercase(String value) {
 		StringBuffer ret = new StringBuffer();
 		ret.append(value.substring(0, 1).toUpperCase());
@@ -156,6 +195,15 @@ public class ReflectionUtils {
 		return ret.toString();
 	}
 
+	/**
+	 * Retorna la clase del atributo "fieldName" del objeto "bean", si no se encuentra el atributo se retorna la clase
+	 * Objeto.
+	 *
+	 * @param bean Objeto
+	 * @param fieldName Atributo del objeto "bean"
+	 * @return La clase del atributo "fieldName" del objeto "bean", si no se encuentra el atributo se retorna la clase
+	 * 		   Objeto
+	 */
 	public static Class<?> getClassForField(Object bean, String fieldName) {
 		Class<?> ret = null;
 		try {
@@ -167,6 +215,11 @@ public class ReflectionUtils {
 		return ret;
 	}
 
+	/**
+	 * Retorna el nombre del método en el que se ejecuta en un String.
+	 *
+	 * @return Nombre del método en el que se ejecuta
+	 */
 	public static String getCurrentMethodName() {
 		boolean doNext = false;
 		String ret = null;
@@ -182,12 +235,12 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * Search for the {@link Field} in the class and all they subclases until 
-	 * the {@link Object}. It returns <code>null</code> in case that the field hasn't been found
-	 * 
-	 * @param fieldName name of the wanted field
-	 * @param clazz type
-	 * @return declared field
+	 * Busca {@link Field} en la clase y todas sus subclases hasta {@link Object}. Retorna <code>null</code> en caso
+	 * que el campo no sea encontrado.
+	 *
+	 * @param fieldName Nombre del campo buscado
+	 * @param clazz Tipo del objeto en donde buscar
+	 * @return Campo declarado
 	 */
 	public static Field getDeclaredField(String fieldName, Class<?> clazz) {
 		Field ret = null;
@@ -210,6 +263,14 @@ public class ReflectionUtils {
 		return ret;
 	}
 
+	/**
+	 * Retorna un array de Strings conteniendo todos los atributos de la clase "clazz" que tengan ambos un getter sin
+	 * argumentos y un setter solo con un argumento de tipo igual al atributo correspondiente.
+	 *
+	 * @param clazz Clase de cual obtener la lista de atributos
+	 * @return Array de atributos de la clase "clazz"
+	 * @throws IllegalStateException
+	 */
 	public static String[] getFieldList(Class<?> clazz)
 			throws IllegalStateException {
 		ArrayList<String> lista = new ArrayList<String>();
@@ -224,13 +285,12 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * 
-	 * Returns the field list read/write of elementType that aren't of 
-	 * type collection
-	 * 
-	 * @param clazz type
-	 * @param elementType element type
-	 * @return list of fields
+	 * Retorna una lista de atributos lectura/escritura de la clase "clazz" de tipo "elementType" que no sean del tipo
+	 * collection.
+	 *
+	 * @param clazz Clase a mirar
+	 * @param elementType Tipo de los atributos a retornar en la lista
+	 * @return Lista de campos
 	 */
 	public static List<String> getFieldsType(Class<?> clazz,
 			Class<?> elementType) {
@@ -256,6 +316,14 @@ public class ReflectionUtils {
 		return ret;
 	}
 
+	/**
+	 * Retorna una lista de atributos lectura/escritura de la clase "clazz" de tipo "elementType" que sean del tipo
+	 * collection.
+	 *
+	 * @param value Objeto a evaluar
+	 * @param elementType Tipo de los atributos a retornar en la lista
+	 * @return Lista de campos
+	 */
 	public static List<String> getFieldsTypeCollection(Object value,
 			Class<?> elementType) {
 		List<String> ret = new ArrayList<String>();
@@ -279,11 +347,27 @@ public class ReflectionUtils {
 		return ret;
 	}
 
+	/**
+	 * Pasado un String que se supone que es un atributo de un objeto retorna le nombre del getter poniendo al comienzo
+	 * la palabra get y pasando a mayúscula la primera letra del String proveido.
+	 *
+	 * @param fieldName Nombre de un atributo para obtener su getter
+	 * @return El getter de "fieldName"
+	 */
 	public static String getGetterMethod(String fieldName) {
 		return "get" + fieldName.substring(0, 1).toUpperCase()
 				+ fieldName.substring(1, fieldName.length());
 	}
 
+	/**
+	 * Se retornara el método de nombre "name" y parámetros "paramas" de la clase del objeto "bean" proveído.
+	 * El orden de las clases de "params" debe ser igual al de los parámetros del método.
+	 *
+	 * @param bean Objeto instanciado
+	 * @param name Nombre del método buscado
+	 * @param params Parámetros de la clase
+	 * @return Método pedido
+	 */
 	public static Method getMethod(Object bean, String name,
 			Class<?>... params) {
 		Method ret = null;
@@ -297,12 +381,12 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * Returns the requested method but consumes the exception
-	 * 
-	 * @param object instanced object
-	 * @param methodName name of the wanted method
-	 * @param params class parameters
-	 * @return requested method
+	 * Retorna el método pedido pero consume la excepción.
+	 *
+	 * @param object Objeto instanciado
+	 * @param methodName Nombre del método buscado
+	 * @param params Parámetros de la clase
+	 * @return Método pedido
 	 */
 	public static Method getMethodQuiet(Object object, String methodName,
 			Class<?>... params) {
@@ -315,6 +399,12 @@ public class ReflectionUtils {
 		return m;
 	}
 
+	/**
+	 * Retorna una lista con los métodos de la clase "clazz" que sean públicos.
+	 *
+	 * @param clazz Clase de donde buscar los métodos públicos
+	 * @return Lista de Métodos públicos pertenecientes a "clazz"
+	 */
 	public static List<Method> getPublicMethods(Class<?> clazz) {
 		List<Method> ret = new ArrayList<Method>();
 		Method[] methods = clazz.getDeclaredMethods();
@@ -329,6 +419,13 @@ public class ReflectionUtils {
 		return ret;
 	}
 
+	/**
+	 * Retorna una lista con los métodos de la clase "clazz" que sean públicos.
+	 *
+	 * @param clazz Clase de donde buscar los métodos públicos
+	 * @param withParameters True para que se incluyan los tipos de los parametros, sino False
+	 * @return Lista de Strings públicos pertenecientes a "clazz"
+	 */
 	public static List<String> getPublicMethodsName(Class<?> clazz,
 			boolean withParameters) {
 		List<String> ret = new ArrayList<String>();
@@ -355,19 +452,27 @@ public class ReflectionUtils {
 		return ret;
 	}
 
+	/**
+	 * Retorna el Method del getter para el atributo de la clase "clazz" y de nombre "fieldName".
+	 *
+	 * @param clazz Clase
+	 * @param fieldName Atributo de "clazz" de donde sacar el getter
+	 * @return Getter del atributo
+	 * @throws IllegalStateException
+	 * @throws NoSuchFieldException
+	 */
 	public static Method getReadMethod(Class<?> clazz, String fieldName)
 			throws IllegalStateException, NoSuchFieldException {
 		PropertyDescriptor desc = obtenerPropertyDescriptor(clazz, fieldName);
 		return desc.getReadMethod();
 	}
-	
+
 	/**
-	 * Returns a value for the data type. The class must have a 
-	 * constructor with a String as parameter
-	 * 
-	 * @param type name of the class for instantiation
-	 * @param value for the constructor
-	 * @return instanced object
+	 * Retorna un valor para el tipo de dato. La clase debe tener un constructor con un String de parametro.
+	 *
+	 * @param type Nombre de la clase para instanciar
+	 * @param value Para el constructor
+	 * @return Objeto instanciado
 	 */
 	public static Object getValue(String type, Object value) {
 		Object ret = null;
@@ -382,12 +487,29 @@ public class ReflectionUtils {
 		return ret;
 	}
 
+	/**
+	 * Retorna el Method del setter para el atributo de la clase "clazz" y de nombre "fieldName".
+	 *
+	 * @param clazz Clase
+	 * @param fieldName Atributo de "clazz" de donde sacar el setter
+	 * @return Setter del atributo
+	 * @throws IllegalStateException
+	 * @throws NoSuchFieldException
+	 */
 	public static Method getWriteMethod(Class<?> clazz, String fieldName)
 			throws IllegalStateException, NoSuchFieldException {
 		PropertyDescriptor desc = obtenerPropertyDescriptor(clazz, fieldName);
 		return desc.getWriteMethod();
 	}
 
+	/**
+	 * Invoca al método "metodo" del objeto "bean" con los parámetros "parameters" ("null" si no tiene parámetros).
+	 *
+	 * @param metodo Método que se quiere ejecutar
+	 * @param bean Objeto del cual ejecutar el método
+	 * @param parameters Parámetros del método ("null" si no tiene parámetros)
+	 * @return Lo retornado por el método invocado
+	 */
 	public static Object invokeMethod(Method metodo, Object bean,
 			Object... parameters) {
 		Object ret = null;
@@ -400,6 +522,15 @@ public class ReflectionUtils {
 		return ret;
 	}
 
+	/**
+	 * Retornara el PropertyDescriptor del atributo "fieldName" de la clase "class".
+	 *
+	 * @param clazz Clase en cuestión
+	 * @param fieldName Atributo
+	 * @return PropertyDescriptor del atributo "fieldName" de la clase "clazz"
+	 * @throws IllegalStateException
+	 * @throws NoSuchFieldException
+	 */
 	public static PropertyDescriptor obtenerPropertyDescriptor(Class<?> clazz,
 			String fieldName) throws IllegalStateException,
 			NoSuchFieldException {
@@ -418,10 +549,10 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * Gets property descriptors
-	 * 
-	 * @param target target class
-	 * @return property descriptors
+	 * Obtiene todos los PropertyDescriptor de la clase "target".
+	 *
+	 * @param target Clase a analizar
+	 * @return Lista de PropertyDescriptor relacionados a la clase "target"
 	 */
 	public static PropertyDescriptor[] getPropertyDescriptors(Class<?> target) throws IllegalStateException {
 		BeanInfo info;
@@ -451,6 +582,14 @@ public class ReflectionUtils {
 		}
 	}
 
+	/**
+	 * Dado un objeto "fuente" se retorna el valor del atributo "fieldName" proveído por su getter.
+	 *
+	 * @param fuente Objeto a mirar
+	 * @param fieldName Atributo del objeto a mirar
+	 * @return Valor contenido en el atributo del objeto
+	 * @throws IllegalStateException
+	 */
 	public static Object read(Object fuente, String fieldName)
 			throws IllegalStateException {
 		try {
@@ -462,6 +601,15 @@ public class ReflectionUtils {
 		}
 	}
 
+	/**
+	 * Dado un objeto "object" se retorna el valor del atributo proveído por su getter pasando el PropertyDescriptor
+	 * "property".
+	 *
+	 * @param property PropertyDescriptor del atributo a obtener
+	 * @param object Objeto a mirar
+	 * @return Valor contenido en el atributo del objeto
+	 * @throws IllegalStateException
+	 */
 	public static Object read(PropertyDescriptor property, Object object)
 			throws IllegalStateException {
 		try {
@@ -471,6 +619,12 @@ public class ReflectionUtils {
 		}
 	}
 
+	/**
+	 * Ejecuta el String en la linea de comando en el directorio raiz del proyecto por defecto.
+	 *
+	 * @param cmdline Comando a ejecutar
+	 * @return Resultado obtenido al ejecutar el comando
+	 */
 	public static Map<Integer, String> salidaComandoPorLinea(String cmdline) {
 		Map<Integer, String> ret = new HashMap<Integer, String>();
 		try {
@@ -489,13 +643,13 @@ public class ReflectionUtils {
 		}
 		return ret;
 	}
-	
+
 	/**
-	 * Verifies the list of fields to have non-null values loaded 
-     * or if they are of type String they must not be empty
-     * 
-	 * @param object to verify
-	 * @return boolean
+	 * Verifica la lista de campos de un objeto, retorna False si ningún campo contiene "null" y si ningún String esta
+	 * vacío "" o solo contiene espacios "   ", sino True.
+	 *
+	 * @param object Objeto a verificar
+	 * @return Boolean
 	 */
 	public static boolean hasNonEmptyValues(Object object) {
 		boolean ret = false;
@@ -512,6 +666,15 @@ public class ReflectionUtils {
 		return ret;
 	}
 
+	/**
+	 * Dado un objeto "object" se escribe el valor "value" en el atributo encontrado usando su PropertyDescriptor
+	 * "property".
+	 *
+	 * @param property PropertyDescriptor del atributo en donde escribir
+	 * @param object Objeto a mirar
+	 * @param value Valor a escribir
+	 * @throws IllegalStateException
+	 */
 	public static void write(PropertyDescriptor property, Object object,
 			Object value) throws IllegalStateException {
 		try {
