@@ -1,3 +1,6 @@
+## [v0.4.0]
+* Agrega Template Utils
+
 ## [v0.2.0]
 ### TimeUtils
 * Agrega clase TimeUtils con metodos basicos para manejo de fechas
