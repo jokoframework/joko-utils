@@ -256,10 +256,10 @@ public class DateTimeUtils {
 
     /**
      * Retorna True si el día de la semana actual es igual al proveído, sino False.
-     * <p>
      *
-     * @param day Dia de la semana del tipo DayOfWeek (https://docs.oracle.com/javase/8/docs/api/java/time/DayOfWeek.html)
+     * @param day Dia de la semana del tipo {@link java.time.DayOfWeek}
      * @return Retorna True si el dia de la semana actual es el dia de la semana proveído
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/time/DayOfWeek.html">DayOfWeek</a>
      */
     public static Boolean isDay(DayOfWeek day){
         if(day == null){
