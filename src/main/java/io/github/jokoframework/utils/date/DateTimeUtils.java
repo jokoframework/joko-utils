@@ -255,10 +255,10 @@ public class DateTimeUtils {
     }
 
     /**
-     * Retorna True si el día de la semana actual es igual al proveído (Mirar tipo DayOfWeek definido en java.time para
-     * el argumento del método, sino retorna False).
+     * Retorna True si el día de la semana actual es igual al proveído, sino False.
+     * <p>
      *
-     * @param day Dia de la semana (Mirar DayOfWeek)
+     * @param day Dia de la semana del tipo DayOfWeek (https://docs.oracle.com/javase/8/docs/api/java/time/DayOfWeek.html)
      * @return Retorna True si el dia de la semana actual es el dia de la semana proveído
      */
     public static Boolean isDay(DayOfWeek day){

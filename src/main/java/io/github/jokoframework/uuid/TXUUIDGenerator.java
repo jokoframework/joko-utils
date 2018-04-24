@@ -124,8 +124,7 @@ public class TXUUIDGenerator {
     private static final int DEFAULT_STRING_LENGTH = 12;
 
     /**
-     * Como máximo se producen UUIDs de characterLength. El límite de caracteres depende de la representación de
-     * ciertos datos.
+     * Como máximo se producen UUIDs de longitud "characterLength". La longitud máxima de caracteres es 27
      * 
      * @param characterLength longitud máxima de caracteres
      */

@@ -26,9 +26,9 @@ public class PdfGenerator {
 	private static final SecureRandom random = new SecureRandom();
 
 	/**
-	 * Retorna un string aleatorio y largo
+	 * Genera un String aleatorio de 26 caracteres alfanuméricos (a-z, A-Z, 0-9)
 	 *
-	 * @return String aleatorio y largo
+	 * @return String aleatorio de 26 caracteres alfanuméricos
 	 */
 	private static String getRandomString() {
 		return new BigInteger(128, random).toString(32);

@@ -1,0 +1,16 @@
+io.github.jokoframework
+io.github.jokoframework.utils.constants
+io.github.jokoframework.utils.csv
+io.github.jokoframework.utils.date
+io.github.jokoframework.utils.dto_mapping
+io.github.jokoframework.utils.dto_mapping.mock
+io.github.jokoframework.utils.encode
+io.github.jokoframework.utils.excel
+io.github.jokoframework.utils.exception
+io.github.jokoframework.utils.http
+io.github.jokoframework.utils.location
+io.github.jokoframework.utils.number
+io.github.jokoframework.utils.pdf
+io.github.jokoframework.utils.reflection
+io.github.jokoframework.utils.security
+io.github.jokoframework.uuid
