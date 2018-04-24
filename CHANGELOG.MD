@@ -1,3 +1,6 @@
+## [v0.5.0]
+Publicamos Javadoc: https://jokoframework.github.io/joko-utils
+
 ## [v0.4.0]
 * Agrega Template Utils
 
