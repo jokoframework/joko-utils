@@ -1,4 +1,5 @@
 io.github.jokoframework
+io.github.jokoframework.template
 io.github.jokoframework.utils.constants
 io.github.jokoframework.utils.csv
 io.github.jokoframework.utils.date
@@ -13,4 +14,5 @@ io.github.jokoframework.utils.number
 io.github.jokoframework.utils.pdf
 io.github.jokoframework.utils.reflection
 io.github.jokoframework.utils.security
+io.github.jokoframework.utils.template
 io.github.jokoframework.uuid
