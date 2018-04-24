@@ -6,8 +6,10 @@ package io.github.jokoframework.utils.constants;
 import java.util.Locale;
 
 /**
- * @author bsandoval
+ * Clase que contiene constantes utilizadas por las distintas clases, algunas de estas constantes deberían de
+ * removerse y dar la opcion de meter como input a la hora de usar las clases
  *
+ * @author bsandoval
  */
 public class JokoConstants {
 

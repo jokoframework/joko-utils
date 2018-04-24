@@ -21,10 +21,10 @@ import io.github.jokoframework.utils.exception.JokoUtilsException;
 public class EncodeUtils {
 
     /**
-     * Converts the received string to ISO-8859-1
-     * 
-     * @param s string to encode
-     * @return converted string
+     * Convierte el String recibido a la codificación ISO-8859-1
+     *
+     * @param s String a codificar
+     * @return String convertido
      */
     public static String convertToLATIN(String s) throws JokoUtilsException {
         byte[] iso;
@@ -38,11 +38,11 @@ public class EncodeUtils {
     }
 
     /**
-     * Converts the received string into requested charset
-     * 
-     * @param s string to encode
-     * @param charset for encoding
-     * @return converted string
+     * Convierte el String recibido al set de caracteres pedido
+     *
+     * @param s String a codificar
+     * @param charset set al cual codificar
+     * @return String convertido
      */
     public static String convertToCharset(String s, String charset) throws JokoUtilsException {
         byte[] iso;
@@ -56,11 +56,11 @@ public class EncodeUtils {
     }
 
     /**
-     * Removes the accents and the �. The direct conversion of charset 
-     * did not convert well leaving the "?" character
-     * 
-     * @param s string to encode
-     * @return converted string
+     * Remueve los acentos y los �. La conversión directa de charset
+     * no se convirtió bien dejando el caracter "?"
+     *
+     * @param s String a codificar
+     * @return String convertido
      */
     public static String convertToUS_ACII(String s) {
         char[] especiales = new char[] { 'á', 'é', 'í', 'o', 'u', 'Á', 'É', 'Í', 'Ó', 'Ú', 'ñ', 'Ñ' };
@@ -73,12 +73,12 @@ public class EncodeUtils {
     }
 
     /**
-     * Converts from source charset to target charset
-     * 
-     * @param encoded string
-     * @param charSetSource for the encoded string
-     * @param charSetTarget for encoding
-     * @return converted string
+     * Convierte de un set de caracteres especificado a otro especificado
+     *
+     * @param encoded String
+     * @param charSetSource Set de caracteres del String inicial
+     * @param charSetTarget Set de caracteres al cual codificar el String
+     * @return String recodificado
      */
     public static String convertEncoding(String encoded, String charSetSource, String charSetTarget)
             throws JokoUtilsException {

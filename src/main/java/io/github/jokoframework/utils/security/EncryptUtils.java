@@ -26,7 +26,7 @@ public class EncryptUtils {
     private static final Logger LOGGER = LoggerFactory.getLogger(EncryptUtils.class);
 
     /**
-     * Type of algorithm used for encryptions
+     * Tipos de algoritmos usados para encriptación
      */
     protected static final String ALGORITHM = "Blowfish";
     private static final String ENCODING = "UTF8";
@@ -41,9 +41,9 @@ public class EncryptUtils {
     }
 
     /**
-     * Generates a random string of six characters
-     * 
-     * @return random string
+     * Genera un String aleatorio de seis caracteres.
+     *
+     * @return random String
      */
     public static String generateRandomPassword() {
         Random a = new Random();
@@ -52,11 +52,11 @@ public class EncryptUtils {
     }
 
     /**
-     * Encrypt a string with a key
+     * Encripta un string con una llave.
      *
-     * @param message string to encrypt
-     * @param key in bytes for encryption
-     * @return encrypted string encoded in Base64
+     * @param message String que se quiere encriptar
+     * @param key En bytes para la encriptación
+     * @return String encriptado codificado en Base64
      */
     public static String encryptWithKey(String message, byte[] key) {
         String ret = null;
@@ -72,6 +72,15 @@ public class EncryptUtils {
         return ret;
     }
 
+    /**
+     * Descifra un string con una llave.
+     *
+     * @param encrypted String codificado en Base64
+     * @param key en bytes para el descifrado
+     * @param quiet Determina si uno quiere imprimir errores de descifrado. Este parámetro se incluyo por motivos de
+     *              compatibilidad con paginas que ya tenían un sistema de encriptado
+     * @return String descifrado codificado en Base64
+     */
     public static String decryptWithKey(String encrypted, byte[] key, boolean quiet) {
         String ret = null;
         if (StringUtils.isNotEmpty(encrypted)) {
@@ -81,14 +90,13 @@ public class EncryptUtils {
     }
 
     /**
-     * Decrypt a string with a key
-     * 
-     * @param encrypted string encoded in Base64
-     * @param key in bytes for decryption
-     * @param quiet determines if you want to print decryption
-     * errors. This parameter was set for compatibility with pages 
-     * that already had encryption.
-     * @return decrypted string encoded in Base64
+     * Descifra un string con una llave.
+     *
+     * @param encrypted String codificado en Base64
+     * @param key en bytes para el descifrado
+     * @param quiet Determina si uno quiere imprimir errores de descifrado. Este parámetro se incluyo por motivos de
+     *              compatibilidad con paginas que ya tenían un sistema de encriptado
+     * @return String descifrado codificado en Base64
      */
     private static String decryptWithByteKey(String encrypted, byte[] key, boolean quiet) {
         String ret = null;
@@ -116,20 +124,20 @@ public class EncryptUtils {
         }
         return ret;
     }
-    
+
     /**
-     * Decrypt a string with a key
-     * 
-     * @param encrypted string encoded in Base64
-     * @param key in bytes for decryption
-     * @return decrypted string encoded in Base64
+     * Decsifra String con una llave.
+     *
+     * @param encrypted String codificado en Base64
+     * @param key en bytes para el descifrado
+     * @return String descifrado codificado en Base64
      */
     public static String decryptWithKey(String encrypted, byte[] key) {
         return decryptWithKey(encrypted, key, false);
     }
 
     /**
-     * From a byte[] returns a base 64 representation
+     * De un byte[] retorna una representación en base 64.
      *
      * @param data los datos a codificar
      * @return la representación en Base64 del array de bytes
@@ -139,9 +147,9 @@ public class EncryptUtils {
     }
 
     /**
-     * From a base 64 representation, returns the corresponding byte[]
+     * De una representación en Base64, retorna el byte[] correspondiente.
      *
-     * @param data The base64 representation
+     * @param data La representación en Base64
      * @return el array binario
      */
     public static byte[] base64ToByte(String data) {
@@ -149,10 +157,10 @@ public class EncryptUtils {
     }
 
     /**
-     * Makes a simple cipher of the password
+     * Hace un cifrado simple de la contraseña.
      *
-     * @param rawPassword password
-     * @return hash bcrypt on Base64
+     * @param rawPassword Password
+     * @return hash bcrypt en Base64
      */
     public static String hashPassword(String rawPassword) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(BCRYPT_COMPLEXITY);
@@ -161,12 +169,11 @@ public class EncryptUtils {
     }
 
     /**
-     * Returns true if the passwords match.
-     * Otherwise return false.
-     * 
-     * @param raw password
-     * @param encoded password
-     * @return true/false
+     * Retorna True si el password y el password cifrado son iguales, de otra forma retorna False
+     *
+     * @param raw Password en crudo
+     * @param encoded Password cifrado
+     * @return True/False
      */
     public static boolean matchPassword(String raw, String encoded) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(BCRYPT_COMPLEXITY);
@@ -174,9 +181,9 @@ public class EncryptUtils {
     }
 
     /**
-     * Generates a SHA-256 string
-     * @param pwd raw password
-     * @return sha256 string
+     * Genera un String en SHA-256
+     * @param pwd Password en crudo
+     * @return sha256 String
      */
     public static String sha256(String pwd) {
         try {
@@ -188,12 +195,12 @@ public class EncryptUtils {
             return null;
         }
     }
-    
+
     /**
-     * Generates a md5 string
-     * 
-     * @param pwd raw password
-     * @return md5 string
+     * Genera un String md5
+     *
+     * @param pwd Password en crudo
+     * @return md5 String
      */
     public static String md5(String pwd) {
         try {
@@ -213,11 +220,11 @@ public class EncryptUtils {
     }
 
     /**
-     * Reads all archive's bytes and turns them on a Base64 string
+     * Lee los bytes de el archivo completo y los convierte a un String en Base64
      *
-     * @param filePath path for read
-     * @return archive content on Base64
-     * @throws IOException if cannot read the bytes
+     * @param filePath Camino al archivo
+     * @return Contenido del archivo como String en Base64
+     * @throws IOException Si no puede leer los bytes
      */
     public static String readFileToBase64(String filePath) throws IOException {
         Path path = FileSystems.getDefault().getPath(filePath);

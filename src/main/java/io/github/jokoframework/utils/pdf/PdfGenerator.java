@@ -24,11 +24,28 @@ import io.github.jokoframework.utils.constants.JokoConstants;
 
 public class PdfGenerator {
 	private static final SecureRandom random = new SecureRandom();
-	
+
+	/**
+	 * Genera un String aleatorio de 26 caracteres alfanuméricos (a-z, A-Z, 0-9)
+	 *
+	 * @return String aleatorio de 26 caracteres alfanuméricos
+	 */
 	private static String getRandomString() {
 		return new BigInteger(128, random).toString(32);
 	}
-	
+
+	/**
+	 * Crea un archivo del formato pdf con la ubicación y nombre del argumento "destination", una tabla de datos dada
+	 * por "data" y una firma al final del archivo con datos de cuando fue creado, propiedades y el creador "user"
+	 * proveído
+	 *
+	 * @param data Lista de Listas de modo que se escribira una Tabla en el pdf con los datos, cada lista dentro de
+	 *             "data" representa una linea de la tabla y seran escritas en ese orden
+	 * @param destination Destino del archivo incluyendo el nombre de este, si se pasa "null" se generara un nombre
+	 *                    aleatoriamente y se pondra en el directorio raiz del proyecto
+	 * @param user String con un nombre de usuario de modo que se agregara una linea hablando de este al final del pdf
+	 * @return Archivo de tipo File que se creo y guardo en el directorio especificado
+	 */
 	@SuppressWarnings("rawtypes") /*https://github.com/dhorions/boxable*/
     public static File fromList(List<List> data, String destination, String user) throws IOException {
 
