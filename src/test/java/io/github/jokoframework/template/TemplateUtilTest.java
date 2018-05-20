@@ -28,4 +28,34 @@ public class TemplateUtilTest {
         Assert.assertEquals(expectedValue, value);
 
     }
+
+    @Test
+    public void testEscapeCurlyBraces() {
+
+        String pin = "320019";
+
+        String template = "Vea su pin entre llaves al final del mensaje. '{'{pin}'}'";
+        String expectedValue = "Vea su pin entre llaves al final del mensaje. {" + pin + "}";
+
+        Map<String, Object> values = new HashMap<String, Object>();
+        values.put("pin", pin);
+        String value = TemplateUtils.formatMap(template, values);
+        Assert.assertEquals(expectedValue, value);
+
+    }
+
+    @Test
+    public void testFormatType() {
+
+        Integer n = 21;
+
+        String template = "Nació hace {n,number} años";
+        String expectedValue = "Nació hace " + n + " años";
+
+        Map<String, Object> values = new HashMap<String, Object>();
+        values.put("n", n);
+        String value = TemplateUtils.formatMap(template, values);
+        Assert.assertEquals(expectedValue, value);
+
+    }
 }
