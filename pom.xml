@@ -4,7 +4,7 @@
   <groupId>io.github.jokoframework</groupId>
   <artifactId>joko-utils</artifactId>
   <packaging>jar</packaging>
-  <version>0.5.0</version>
+  <version>0.5.1</version>
   <name>joko-utils</name>
   <url>http://maven.apache.org</url>
 
@@ -17,7 +17,7 @@
     <commons-lang3.version>3.6</commons-lang3.version>
     <commons-io.version>2.6</commons-io.version>
     <joda-time.version>2.9.9</joda-time.version>
-    <pdfbox.version>2.0.1</pdfbox.version>
+    <pdfbox.version>2.0.12</pdfbox.version>
     <orika-core.version>1.5.2</orika-core.version>
   </properties>
 
