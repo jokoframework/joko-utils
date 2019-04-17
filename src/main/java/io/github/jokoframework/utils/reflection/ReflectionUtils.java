@@ -26,8 +26,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ReflectionUtils {
-    
-    private static final Logger log = LoggerFactory.getLogger(ReflectionUtils.class);
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReflectionUtils.class);
+
+	private  ReflectionUtils () {
+		//No public constructor
+	}
 
 	/**
 	 * El método retorna el resultado de llamar el getter para cierto atributo "fieldName" para cierto objeto "bean",
@@ -38,12 +42,12 @@ public class ReflectionUtils {
 	 * @return El valor del atributo "fieldName" del objeto "bean"
 	 * @throws IllegalStateException
 	 */
-	public static Object callGetter(Object bean, String fieldName)
+	private static Object callGetter(Object bean, String fieldName)
 			throws IllegalStateException {
 		Method m = null;
 		Object ret = null;
 		try {
-			if (fieldName.indexOf(".") != -1) {
+			if (fieldName.contains(".")) {
 				ret = PropertyUtils.getNestedProperty(bean, fieldName);
 			} else {
 				m = getReadMethod(bean.getClass(), fieldName);
@@ -66,7 +70,7 @@ public class ReflectionUtils {
 	 */
 	public static String callGetterDynamic(Object bean, String field, List<Integer> parameters) {
 		String methodName = "get" + firstLetterToUppercase(field);
-		String ret = "_EMPTY_";
+		String ret;
 		Class<?>[] parameterTypes = new Class<?>[parameters.size()];
 		Object[] paramsArray = parameters.toArray();
 		int i = 0;
@@ -96,7 +100,7 @@ public class ReflectionUtils {
 	public static void callSetter(Object bean, String fieldName, Object valor) {
 		Method m = null;
 		try {
-			if (fieldName.indexOf(".") > 0) {
+			if (fieldName.contains(".")) {
 				PropertyUtils.setNestedProperty(bean, fieldName, valor);
 			} else {
 				m = getWriteMethod(bean.getClass(), fieldName);
@@ -124,11 +128,11 @@ public class ReflectionUtils {
 	 * @param withHash True si se quiere que se muestre con el hashCode, sino False
 	 * @return String con la descripción del objeto
 	 */
-	public static String describe(Object object, Boolean withHash) {
+	private static String describe(Object object, Boolean withHash) {
 		String name = object.getClass().getSimpleName();
 		String className = object.getClass().getName();
-		StringBuffer ret = new StringBuffer();
-		StringBuffer sbNullValues = new StringBuffer("{");
+		StringBuilder ret = new StringBuilder();
+		StringBuilder sbNullValues = new StringBuilder("{");
 		PropertyDescriptor[] descs;
 		int i = 0;
 		try {
@@ -188,8 +192,8 @@ public class ReflectionUtils {
 	 * @param value String
 	 * @return "value" con su primer caracter pasado a mayúscula
 	 */
-	public static String firstLetterToUppercase(String value) {
-		StringBuffer ret = new StringBuffer();
+	private static String firstLetterToUppercase(String value) {
+		StringBuilder ret = new StringBuilder();
 		ret.append(value.substring(0, 1).toUpperCase());
 		ret.append(value.substring(1));
 		return ret.toString();
@@ -271,7 +275,7 @@ public class ReflectionUtils {
 	 * @return Array de atributos de la clase "clazz"
 	 * @throws IllegalStateException
 	 */
-	public static String[] getFieldList(Class<?> clazz)
+	private static String[] getFieldList(Class<?> clazz)
 			throws IllegalStateException {
 		ArrayList<String> lista = new ArrayList<String>();
 		PropertyDescriptor[] descs = getPropertyDescriptors(clazz);
@@ -374,7 +378,7 @@ public class ReflectionUtils {
 		try {
 			ret = bean.getClass().getMethod(name, params);
 		} catch (Exception e) {
-			log.debug("Couldn't get method : ", e);
+			LOGGER.debug("Couldn't get method : ", e);
 			ret = null;
 		}
 		return ret;
@@ -405,7 +409,7 @@ public class ReflectionUtils {
 	 * @param clazz Clase de donde buscar los métodos públicos
 	 * @return Lista de Métodos públicos pertenecientes a "clazz"
 	 */
-	public static List<Method> getPublicMethods(Class<?> clazz) {
+	private static List<Method> getPublicMethods(Class<?> clazz) {
 		List<Method> ret = new ArrayList<Method>();
 		Method[] methods = clazz.getDeclaredMethods();
 		for (int i = 0; i < methods.length; i++) {
@@ -434,7 +438,7 @@ public class ReflectionUtils {
 			int mods = method.getModifiers();
 			if (mods == Modifier.PUBLIC
 					|| (mods == (Modifier.PUBLIC | Modifier.ABSTRACT))) {
-				StringBuffer mDesc = new StringBuffer(method.getName());
+				StringBuilder mDesc = new StringBuilder(method.getName());
 				if (withParameters) {
 					Class<?>[] params = method.getParameterTypes();
 					mDesc.append("(");
@@ -461,7 +465,7 @@ public class ReflectionUtils {
 	 * @throws IllegalStateException
 	 * @throws NoSuchFieldException
 	 */
-	public static Method getReadMethod(Class<?> clazz, String fieldName)
+	private static Method getReadMethod(Class<?> clazz, String fieldName)
 			throws IllegalStateException, NoSuchFieldException {
 		PropertyDescriptor desc = obtenerPropertyDescriptor(clazz, fieldName);
 		return desc.getReadMethod();
@@ -481,8 +485,7 @@ public class ReflectionUtils {
 					String.class);
 			ret = constructor.newInstance(value);
 		} catch (Exception e) {
-			log.error("Couldn't instanciate " + type + " with value : "
-					+ value);
+			LOGGER.error("Couldn't instanciate {}  with value : {}", type, value);
 		}
 		return ret;
 	}
@@ -496,7 +499,7 @@ public class ReflectionUtils {
 	 * @throws IllegalStateException
 	 * @throws NoSuchFieldException
 	 */
-	public static Method getWriteMethod(Class<?> clazz, String fieldName)
+	private static Method getWriteMethod(Class<?> clazz, String fieldName)
 			throws IllegalStateException, NoSuchFieldException {
 		PropertyDescriptor desc = obtenerPropertyDescriptor(clazz, fieldName);
 		return desc.getWriteMethod();
@@ -517,7 +520,7 @@ public class ReflectionUtils {
 			ret = metodo.invoke(bean, parameters);
 		} catch (Exception e) {
 			ret = null;
-			log.debug("Couldn't invoke the method ", e);
+			LOGGER.debug("Couldn't invoke the method ", e);
 		}
 		return ret;
 	}
@@ -531,8 +534,8 @@ public class ReflectionUtils {
 	 * @throws IllegalStateException
 	 * @throws NoSuchFieldException
 	 */
-	public static PropertyDescriptor obtenerPropertyDescriptor(Class<?> clazz,
-			String fieldName) throws IllegalStateException,
+	private static PropertyDescriptor obtenerPropertyDescriptor(Class<?> clazz,
+                                                                String fieldName) throws IllegalStateException,
 			NoSuchFieldException {
 		PropertyDescriptor ret = null;
 		PropertyDescriptor[] props = getPropertyDescriptors(clazz);
@@ -554,24 +557,21 @@ public class ReflectionUtils {
 	 * @param target Clase a analizar
 	 * @return Lista de PropertyDescriptor relacionados a la clase "target"
 	 */
-	public static PropertyDescriptor[] getPropertyDescriptors(Class<?> target) throws IllegalStateException {
+	private static PropertyDescriptor[] getPropertyDescriptors(Class<?> target) throws IllegalStateException {
 		BeanInfo info;
 		PropertyDescriptor[] ret;
-		Comparator<PropertyDescriptor> comparator = new Comparator<PropertyDescriptor>() {
-
-			public int compare(PropertyDescriptor o1, PropertyDescriptor o2) {
-				int ret = -1;
-				// hack so that it always shows the "id" first
-				if (o1.getName().equals("id")) {
-					ret = -1;
-				} else if (o2.getName().equals("id")) {
-					ret = 1;
-				} else {
-					ret = o1.getName().compareTo(o2.getName());
-				}
-				return ret;
-			}
-		};
+		Comparator<PropertyDescriptor> comparator = (o1, o2) -> {
+            int ret1 = -1;
+            // hack so that it always shows the "id" first
+            if (o1.getName().equals("id")) {
+                ret1 = -1;
+            } else if (o2.getName().equals("id")) {
+                ret1 = 1;
+            } else {
+                ret1 = o1.getName().compareTo(o2.getName());
+            }
+            return ret1;
+        };
 		try {
 			info = Introspector.getBeanInfo(target);
 			ret = info.getPropertyDescriptors();
@@ -635,11 +635,11 @@ public class ReflectionUtils {
 					p.getInputStream()));
 			while ((line = input.readLine()) != null) {
 				ret.put(nroLinea, line);
-				nroLinea = new Integer(nroLinea + 1);
+				nroLinea = Integer.valueOf(nroLinea + 1);
 			}
 			input.close();
 		} catch (Exception err) {
-			log.error("Command execution failed:" + cmdline);
+			LOGGER.error("Command execution failed: {}", cmdline);
 		}
 		return ret;
 	}
@@ -657,11 +657,12 @@ public class ReflectionUtils {
 		for (String field : fields) {
 			Object value = ReflectionUtils.callGetter(object, field);
 			if (value == null
-					|| ((value instanceof String && StringUtils.isBlank(value.toString())))) {
+					|| (value instanceof String && StringUtils.isBlank(value.toString()))) {
 				ret = true;
 			}
-			if (ret)
-				break;
+			if (ret) {
+                break;
+            }
 		}
 		return ret;
 	}

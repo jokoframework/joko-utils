@@ -17,6 +17,10 @@ public class TemplateUtils {
     //expresion regular para valores dentro de curly braces
     private static final Pattern INTERPOLATION_PATTERN = Pattern.compile("\\{(\\w+)(.*?)\\}");
 
+    private TemplateUtils () {
+        //No public constructor
+    }
+
     /**
      * Formatea un template con tokens (encerrados entre llaves) a partir de
      * los valores

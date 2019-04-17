@@ -25,4 +25,8 @@ public class JokoConstants {
     public static final String DATE_FORMAT = "dd/MM/yyyy";
     
     public static final String LATIN1_CHARSET = "ISO-8859-1";
+
+    private JokoConstants () {
+        //No public constructor
+    }
 }

@@ -20,6 +20,10 @@ import io.github.jokoframework.utils.exception.JokoUtilsException;
  */
 public class EncodeUtils {
 
+    private EncodeUtils () {
+        //No public constructor
+    }
+
     /**
      * Convierte el String recibido a la codificación ISO-8859-1
      *
