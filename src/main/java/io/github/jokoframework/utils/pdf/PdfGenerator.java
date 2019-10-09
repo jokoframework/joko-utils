@@ -25,6 +25,10 @@ import io.github.jokoframework.utils.constants.JokoConstants;
 public class PdfGenerator {
 	private static final SecureRandom random = new SecureRandom();
 
+	private PdfGenerator () {
+		//No public constructor
+	}
+
 	/**
 	 * Genera un String aleatorio de 26 caracteres alfanuméricos (a-z, A-Z, 0-9)
 	 *

@@ -31,7 +31,8 @@ public class EncryptUtils {
     protected static final String ALGORITHM = "Blowfish";
     private static final String ENCODING = "UTF8";
     private static final int BCRYPT_COMPLEXITY = 6;
-    
+
+    private static final Random RANDOM = new Random();
     /*
      * *********************************************************
      */
@@ -46,9 +47,8 @@ public class EncryptUtils {
      * @return random String
      */
     public static String generateRandomPassword() {
-        Random a = new Random();
-        a.setSeed(System.currentTimeMillis());
-        return String.format("%06d", a.nextInt(999999));
+        RANDOM.setSeed(System.currentTimeMillis());
+        return String.format("%06d", RANDOM.nextInt(999999));
     }
 
     /**
@@ -67,7 +67,7 @@ public class EncryptUtils {
             byte[] encrypted = c.doFinal(message.getBytes(ENCODING));
             ret = byteToBase64(encrypted);
         } catch (Exception e) {
-            LOGGER.error("Couldn't encrypt the string: " + e.getMessage(), e);
+            LOGGER.error(String.format("Couldn't encrypt the string: %s", message), e);
         }
         return ret;
     }
@@ -110,13 +110,13 @@ public class EncryptUtils {
             ret = new String(raw, ENCODING);
         } catch (Exception e) {
             if (!quiet)
-                LOGGER.error("Couldn't decrypt the string: " + encrypted, e);
+                LOGGER.error(String.format("Couldn't decrypt the string: %s", encrypted), e);
             if (LOGGER.isTraceEnabled()) {
                 if (quiet) // solo vuelvo a imprimir si es quiet, porque sino ya
                     // se imprime antes
-                    LOGGER.trace("No se pudo desencriptar la cadena: " + encrypted);
+                    LOGGER.trace("No se pudo desencriptar la cadena: {}", encrypted);
                 try {
-                    LOGGER.trace("\tkey: " + new String(key, "UTF-8"));
+                    LOGGER.trace("\tkey: {}", new String(key, "UTF-8"));
                 } catch (UnsupportedEncodingException pE) {
                     LOGGER.error("Couldn't encode the string", pE);
                 }

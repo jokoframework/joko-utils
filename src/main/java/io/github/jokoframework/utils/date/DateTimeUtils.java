@@ -30,6 +30,10 @@ public class DateTimeUtils {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(DateTimeUtils.class);
 
+    private DateTimeUtils () {
+        //No public constructor
+    }
+
     /**
      * Retorna la fecha y tiempo actual.
      *

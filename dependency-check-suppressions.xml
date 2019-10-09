@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.2.xsd">
+   <suppress>
+      <!-- false positive. Read: https://pivotal.io/security/cve-2018-1258 -->
+      <notes><![CDATA[
+      file name: spring-security-crypto-5.1.5.RELEASE.jar
+      ]]></notes>
+      <gav regex="true">^org\.springframework\.security:spring-security-crypto:.*$</gav>
+      <cve>CVE-2018-1258</cve>
+   </suppress>
+</suppressions>

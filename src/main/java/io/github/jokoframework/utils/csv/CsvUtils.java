@@ -25,6 +25,10 @@ public class CsvUtils {
     
     private static final Logger log = LoggerFactory.getLogger(CsvUtils.class);
 
+    private CsvUtils () {
+        //No public constructor
+    }
+
     /**
      * Representa una lista de objetos en forma de tabla, generando un archivo CSV en base a las columnas especificadas
      *
@@ -59,7 +63,6 @@ public class CsvUtils {
             
             return baos.toByteArray();
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
             throw new JokoUtilsException(e.getMessage(), e);
         }
     }

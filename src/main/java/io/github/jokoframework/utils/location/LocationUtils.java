@@ -15,6 +15,10 @@ public class LocationUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LocationUtils.class);
 
+    private LocationUtils () {
+        //No public constructor
+    }
+
     /**
      * Calcula la distancia entre dos puntos en latitud y longitud tomando en
      * cuenta la diferencia en elevación (Elevación en metros). Si no esta interesado

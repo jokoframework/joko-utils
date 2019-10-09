@@ -23,6 +23,10 @@ public class NumberUtils {
     
     private static final Logger log = LoggerFactory.getLogger(NumberUtils.class);
 
+    private NumberUtils () {
+        //No public constructor
+    }
+
 
     /**
      * Retorna un entero positivo entre 1 y el argumento
@@ -102,15 +106,16 @@ public class NumberUtils {
             // that's why we don't use it. 
             DecimalFormatSymbols newSymbols = new DecimalFormatSymbols(
                     JokoConstants.DEFAULT_LOCALE);
-            BigDecimal valor = new BigDecimal("0");
+            BigDecimal valor;
             newSymbols.setDecimalSeparator(',');
             newSymbols.setGroupingSeparator('.');
             moneyFormatter.setDecimalFormatSymbols(newSymbols);
             moneyFormatter.setParseBigDecimal(true);
-            if (object instanceof BigDecimal)
+            if (object instanceof BigDecimal) {
                 valor = (BigDecimal) object;
-            else
+            } else {
                 valor = new BigDecimal(object.toString());
+            }
             String formateado = moneyFormatter.format(valor);
             
             // convert 0,0 -> ,00
@@ -120,7 +125,7 @@ public class NumberUtils {
                     ret = formateado.substring(0,
                             formateado.length() - ZEROS.length());
                 } else {
-                    int idxComa = formateado.indexOf(",");
+                    int idxComa = formateado.indexOf(',');
                     if (idxComa > 0) {
                         ret = formateado.substring(0, idxComa);
                     } else
@@ -151,15 +156,16 @@ public class NumberUtils {
             // that's why we don't use it. 
             DecimalFormatSymbols newSymbols = new DecimalFormatSymbols(
                     JokoConstants.DEFAULT_LOCALE);
-            BigDecimal valor = new BigDecimal("0");
+            BigDecimal valor;
             newSymbols.setDecimalSeparator(',');
             newSymbols.setGroupingSeparator('.');
             moneyFormatter.setDecimalFormatSymbols(newSymbols);
             moneyFormatter.setParseBigDecimal(true);
-            if (object instanceof BigDecimal)
+            if (object instanceof BigDecimal) {
                 valor = (BigDecimal) object;
-            else
+            } else {
                 valor = new BigDecimal(object.toString());
+            }
             String formateado = moneyFormatter.format(valor);
             
             // convert 0,0 -> ,00
