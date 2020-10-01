@@ -4,7 +4,7 @@
     <groupId>io.github.jokoframework</groupId>
     <artifactId>joko-utils</artifactId>
     <packaging>jar</packaging>
-    <version>0.6.3</version>
+    <version>0.6.4</version>
     <name>joko-utils</name>
     <url>http://maven.apache.org</url>
 
@@ -152,6 +152,29 @@
     </dependencies>
     <build>
         <plugins>
+           <!--Establece la versión mínima de maven -->
+		   <plugin>
+		      <inherited>true</inherited>
+		      <groupId>org.apache.maven.plugins</groupId>
+		      <artifactId>maven-enforcer-plugin</artifactId>
+		      <version>3.0.0-M3</version>
+		        <executions>
+		          <execution>
+		            <id>enforce-maven-3</id>
+		            <goals>
+		              <goal>enforce</goal>
+		            </goals>
+		            <configuration>
+		              <rules>
+		                <requireMavenVersion>
+		                  <version>3.1.0</version>
+		                </requireMavenVersion>                
+		              </rules>
+		              <fail>true</fail>
+		            </configuration>
+		          </execution>
+		       </executions>
+		    </plugin>
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
@@ -171,4 +194,11 @@
             </plugin>
         </plugins>
     </build>
+	<distributionManagement>
+	   <repository>
+	     <id>github</id>
+	     <name>GitHub jokoframework Apache Maven Packages</name>
+	     <url>https://maven.pkg.github.com/jokoframework/joko-utils</url>
+	   </repository>
+	</distributionManagement>
 </project>
