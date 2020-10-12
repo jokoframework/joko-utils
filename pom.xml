@@ -20,7 +20,7 @@
         <pdfbox.version>2.0.21</pdfbox.version>
         <orika-core.version>1.5.4</orika-core.version>
         <dependency-check.version>6.0.2</dependency-check.version>
-        <junit.version>4.13</junit.version>
+        <junit.version>4.13.1</junit.version>
         <spring-beans.version>5.2.9.RELEASE</spring-beans.version>
         <commons-codec.version>1.15</commons-codec.version>
         <boxable.version>1.6</boxable.version>
