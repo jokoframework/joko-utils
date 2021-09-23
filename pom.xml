@@ -29,7 +29,7 @@
         <spring-security-crypto.version>5.4.0</spring-security-crypto.version>
         <slf4j-api.version>1.7.30</slf4j-api.version>
         <slf4j-simple.version>1.7.30</slf4j-simple.version>
-        <guava.version>29.0-jre</guava.version>
+        <guava.version>30.0-jre</guava.version>
         <jaxb-api.version>2.4.0-b180830.0359</jaxb-api.version>
         <javax.xml.bind.version>2.4.0-b180830.0359</javax.xml.bind.version>
     </properties>
