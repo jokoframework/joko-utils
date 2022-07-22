@@ -8,4 +8,13 @@
       <gav regex="true">^org\.springframework\.security:spring-security-crypto:.*$</gav>
       <cve>CVE-2018-1258</cve>
    </suppress>
+
+   <suppress>
+	           <!-- Falso positivo. Detalles: https://github.com/spring-projects/spring-framework/issues/24434#issuecomment-579669626 -->
+   <notes><![CDATA[
+   file name: spring-core-5.3.22.jar
+   ]]></notes>
+   <cve>CVE-2016-1000027</cve>
+</suppress>
+
 </suppressions>

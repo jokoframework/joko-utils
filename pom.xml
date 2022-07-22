@@ -4,7 +4,7 @@
     <groupId>io.github.jokoframework</groupId>
     <artifactId>joko-utils</artifactId>
     <packaging>jar</packaging>
-    <version>0.6.5</version>
+    <version>0.6.6</version>
     <name>joko-utils</name>
     <url>http://maven.apache.org</url>
 
@@ -19,14 +19,14 @@
         <joda-time.version>2.10.6</joda-time.version>
         <pdfbox.version>2.0.24</pdfbox.version>
         <orika-core.version>1.5.4</orika-core.version>
-        <dependency-check.version>6.3.1</dependency-check.version>
+        <dependency-check.version>7.1.0</dependency-check.version>
         <junit.version>4.13.1</junit.version>
-        <spring-beans.version>5.2.9.RELEASE</spring-beans.version>
+        <spring-beans.version>5.3.22</spring-beans.version>
         <commons-codec.version>1.15</commons-codec.version>
         <boxable.version>1.6</boxable.version>
         <poi-ooxml.version>4.1.2</poi-ooxml.version>
         <opencsv.version>5.2</opencsv.version>
-        <spring-security-crypto.version>5.5.2</spring-security-crypto.version>
+        <spring-security-crypto.version>5.7.2</spring-security-crypto.version>
         <slf4j-api.version>1.7.30</slf4j-api.version>
         <slf4j-simple.version>1.7.30</slf4j-simple.version>
         <guava.version>30.0-jre</guava.version>
