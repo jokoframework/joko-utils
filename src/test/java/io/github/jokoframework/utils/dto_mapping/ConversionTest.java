@@ -36,7 +36,7 @@ public class ConversionTest {
 
         //Como el ID no es parte del DTO lo setea explicitamente
         customerEntity2.setId(customer.getId());
-        Assert.assertNotEquals(customer,customerEntity2);
+        Assert.assertEquals(customer,customerEntity2);
 
     }
 
