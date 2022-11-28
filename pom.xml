@@ -25,7 +25,7 @@
         <commons-codec.version>1.15</commons-codec.version>
         <boxable.version>1.6</boxable.version>
         <poi-ooxml.version>5.2.3</poi-ooxml.version>
-        <opencsv.version>5.2</opencsv.version>
+        <opencsv.version>5.7.1</opencsv.version>
         <spring-security-crypto.version>6.0.0</spring-security-crypto.version>
         <slf4j-api.version>1.7.30</slf4j-api.version>
         <guava.version>30.0-jre</guava.version>
