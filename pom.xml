@@ -19,7 +19,7 @@
         <joda-time.version>2.10.6</joda-time.version>
         <pdfbox.version>2.0.24</pdfbox.version>
         <orika-core.version>1.5.4</orika-core.version>
-        <dependency-check.version>7.1.0</dependency-check.version>
+        <dependency-check.version>7.4.0</dependency-check.version>
         <junit.version>4.13.1</junit.version>
         <spring-beans.version>5.3.24</spring-beans.version>
         <commons-codec.version>1.15</commons-codec.version>
