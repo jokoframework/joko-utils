@@ -48,6 +48,7 @@ public class UUIDGenerationTest {
     private void testLength(int pExpectedLength) {
         TXUUIDGenerator generator=new TXUUIDGenerator(pExpectedLength);
         String uuid = generator.generate();
-        Assert.assertEquals(pExpectedLength,uuid.length());
+        //Assert.assertEquals(pExpectedLength,uuid.length());
+        Assert.fail("Probando error intencional");
     }
 }
