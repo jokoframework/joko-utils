@@ -22,6 +22,7 @@ import be.quodlibet.boxable.datatable.DataTable;
 import be.quodlibet.boxable.utils.PDStreamUtils;
 import be.quodlibet.boxable.utils.PageContentStreamOptimized;
 import io.github.jokoframework.utils.constants.JokoConstants;
+import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
 
 public class PdfGenerator {
 	private static final SecureRandom random = new SecureRandom();
@@ -88,7 +89,7 @@ public class PdfGenerator {
 			float yPosition = baseTable.draw() - 20;
 			float leftMargin = 50;
 			float titleFontSize = 8;
-			PDFont font = PDType1Font.HELVETICA;
+			PDFont font = new PDType1Font(Standard14Fonts.FontName.HELVETICA);
 			
 			Date date = new Date();
 	        DateFormat dateFormat = new SimpleDateFormat(JokoConstants.DATE_TIME_FORMAT);
