@@ -9,11 +9,11 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <joko.utils.version>0.6.13</joko.utils.version>
-        <java.version>11</java.version>
+        <joko.utils.version>0.6.14</joko.utils.version>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-lang3.version>3.11</commons-lang3.version>
         <commons-io.version>2.8.0</commons-io.version>
@@ -26,7 +26,7 @@
         <commons-codec.version>1.15</commons-codec.version>
         <boxable.version>1.6</boxable.version>
         <poi-ooxml.version>5.2.5</poi-ooxml.version>
-	<opencsv.version>5.7.1</opencsv.version>
+	    <opencsv.version>5.7.1</opencsv.version>
         <spring-security-crypto.version>5.8.7</spring-security-crypto.version>
         <slf4j-api.version>1.7.30</slf4j-api.version>
         <slf4j-simple.version>1.7.30</slf4j-simple.version>
