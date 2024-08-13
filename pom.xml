@@ -12,6 +12,7 @@
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
+	    <!-- prueba comentario --> 
         <maven.compiler.target>11</maven.compiler.target>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-lang3.version>3.11</commons-lang3.version>
