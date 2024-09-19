@@ -50,4 +50,11 @@ public class UUIDGenerationTest {
         String uuid = generator.generate();
         Assert.assertEquals(pExpectedLength,uuid.length());
     }
+
+    @Test
+    public void thisTestWillFail() {
+    // This assertion will always fail because true is not false
+        assertTrue("This test is designed to fail.", false);
+    }
+
 }
