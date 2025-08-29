@@ -35,7 +35,9 @@ public class NumberUtils {
      * @return Entero entre 1 y el argumento (Inclusivo)
      */
     public static Integer getRandomInteger(int maxValue) {
-        Integer ret = (RandomUtils.nextInt() % maxValue) + 1;
+        // Se corrige la implementación para usar el método correcto de RandomUtils
+        // que garantiza un valor positivo dentro del rango especificado.
+        Integer ret = Integer.valueOf(RandomUtils.nextInt(1, maxValue + 1));
         return ret;
     }
 
@@ -72,7 +74,7 @@ public class NumberUtils {
      *         a la izquierda del número original
      */
     public static String leftPadZeros(Number cod, Integer zerosQuantity) {
-        return padNumberWithZeros(cod, zerosQuantity, true);
+        return padNumberWithZeros(cod, zerosQuantity, Boolean.TRUE);
     }
 
     /**
@@ -87,7 +89,7 @@ public class NumberUtils {
      *         a la derecha del número original
      */
     public static String rightPadZeros(Number cod, Integer zerosQuantity) {
-        return padNumberWithZeros(cod, zerosQuantity, false);
+        return padNumberWithZeros(cod, zerosQuantity, Boolean.FALSE);
     }
 
     /**
@@ -111,10 +113,18 @@ public class NumberUtils {
             newSymbols.setGroupingSeparator('.');
             moneyFormatter.setDecimalFormatSymbols(newSymbols);
             moneyFormatter.setParseBigDecimal(true);
+
             if (object instanceof BigDecimal) {
                 valor = (BigDecimal) object;
+            } else if (object instanceof Number) {
+                valor = BigDecimal.valueOf(((Number) object).doubleValue());
             } else {
-                valor = new BigDecimal(object.toString());
+                try {
+                    valor = new BigDecimal(object.toString());
+                } catch (NumberFormatException e) {
+                    log.error("El String no tiene un formato numérico válido: {}", object, e);
+                    return "0,00"; // Retorna un valor por defecto en caso de error
+                }
             }
             String formateado = moneyFormatter.format(valor);
             
@@ -161,10 +171,18 @@ public class NumberUtils {
             newSymbols.setGroupingSeparator('.');
             moneyFormatter.setDecimalFormatSymbols(newSymbols);
             moneyFormatter.setParseBigDecimal(true);
+
             if (object instanceof BigDecimal) {
                 valor = (BigDecimal) object;
+            } else if (object instanceof Number) {
+                valor = BigDecimal.valueOf(((Number) object).doubleValue());
             } else {
-                valor = new BigDecimal(object.toString());
+                try {
+                    valor = new BigDecimal(object.toString());
+                } catch (NumberFormatException e) {
+                    log.error("El String no tiene un formato numérico válido: {}", object, e);
+                    return "0,00"; // Retorna un valor por defecto en caso de error
+                }
             }
             String formateado = moneyFormatter.format(valor);
             
